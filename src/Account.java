@@ -1,16 +1,16 @@
 public class Account {
-    private long number;
+    private String number;
     private int cvv;
     private int expiration;
 
 
 
-    public long getNumber() {
+    public String getNumber() {
         return this.number;
     }
 
-    public void setNumber(long number) {
-        this.number = number;
+    public void setNumber(String cardNumber) {
+        this.number = cardNumber;
     }
 
     public int getCvv() {
