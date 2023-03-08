@@ -2,6 +2,7 @@ public class Account {
     private String number;
     private int cvv;
     private int expiration;
+    private double cash;
 
 
 
@@ -28,5 +29,17 @@ public class Account {
     public void setExpiration(int expiration) {
         this.expiration = expiration;
     }
+
+
+    public double getCash() {
+        return this.cash;
+    }
+
+    public void setCash(double cash) {
+        this.cash = cash;
+    }
+
+
+
 
 }

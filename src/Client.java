@@ -37,4 +37,40 @@ public class Client {
         this.account = account;
     }
 
+    //to deposite inside the account/cash
+    public void deposit(double amount) {
+        amount = this.account.getCash() + amount;
+        account.setCash(amount);
+    }
+
+    //to withdraw inside the accound/cash
+    public void withdraw(double amount) {
+        double cash = this.account.getCash();
+        if (amount <= cash){
+            amount = cash - amount;
+            this.account.setCash(amount);
+        } else {
+            System.out.println("Sorry, there's not enought cash to withdraw " + amount + "in this account");
+        };
+        System.out.println("This account have: " + this.account.getCash());
+    };
+
+    //to transfer inside the accound/cash within accounts
+    public void transfer(User to, double amount){
+        double thisCash = this.account.getCash();
+        if(thisCash >= amount){
+
+            this.withdraw(amount);
+
+            to.deposit(amount);
+
+
+
+            System.out.println("The transference has succed, this account have: " + this.account.getCash() + "and the transfered account " + to.getClient().getName() + "now have" + to.getClient().getAccount().getCash());
+        } else {
+            System.out.println("Sorry, there's not enought cash in this account to transfer to " + to.getClient().getName() + "because this account only have " + this.account.getCash());
+        }
+    }
+
+
 }
