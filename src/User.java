@@ -1,10 +1,11 @@
-public class User {
+public abstract class User{
     private String username;
     private String password;
     private int number;
     private Client client = new Client();
     private static int userCounter = 0; //static makes the data independient of the new creation. The user counter increase when a object is created, so it gives the user a unic number.
 
+    private logInUtil util;
     //ask for all the data
     public User(String username, String password, String name, int id, String location, String cardNumber, int cardCvv, int cardExpiration, double cash) {
         //User
@@ -73,6 +74,11 @@ public class User {
                 System.out.println("The Account's cash is: " + this.client.getAccount().getCash());
 
 
+        //init login util, here we're initialiting a unility class
+        this.util = new logInUtil();
+        this.util.setUserPassword(password);
+        this.util.setUserUsername(username);
+
         //total accounts registered 
         System.out.println("There are " + userCounter + " user registered");
     }
@@ -123,6 +129,25 @@ public class User {
         } else {
             System.out.println("Sorry, there's not enought cash in this account to transfer to " + to.getClient().getName() + "because this account only have " + this.client.getAccount().getCash());
         }
+    }
+
+
+
+
+
+    //to get country and passport in the child classes
+    public String getCountry() {
+        return this.getCountry();
+    }
+
+    public String getPassport() {
+        return this.getPassport();
+    }
+
+
+    //here we're using a unility class
+    public boolean logIn(String password){
+        return this.util.logIn(password);
     }
     
 }
