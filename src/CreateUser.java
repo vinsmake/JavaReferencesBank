@@ -1,11 +1,10 @@
 public class CreateUser {
     public static void main(String[] args) {
         //creates the user with username and password
-        User userVinsmake = new User("vinsmake", "myPassword", "enrique", 481516, "Guadalajara", "4815859641523647", 574, 122025, 2000);
+        User userVinsmake = new UserEuropean("vinsmake", "myPassword", "enrique", 481516, "Guadalajara", "4815859641523647", 574, 122025, 2000, "UK", "UK542615216524154");
 
 //these two below only shows that the getters works
         //uses the getters to consult.
-        System.out.println(userVinsmake.getUsername());
         System.out.println(userVinsmake.getPassword());
 
             //these are inside user.client
@@ -18,7 +17,11 @@ public class CreateUser {
                 System.out.println(userVinsmake.getClient().getAccount().getCvv());
                 System.out.println(userVinsmake.getClient().getAccount().getExpiration());
 
-        User userAmanda = new User("Xboxeth", "amanda23", "Amanda", 56852, "Zapopan", "4815632458912586", 254, 82025, 5500);
+                    //these are inside UserEuropean 
+                    System.out.println(userVinsmake.getCountry());
+                    System.out.println(userVinsmake.getPassport());
+
+        User userAmanda = new UserEuropean("Xboxeth", "myPassword", "Amanda", 56852, "Zapopan", "4815632458912586", 254, 82025, 5500, "France", "FR6254651254");
         //uses the getters to consult.
         System.out.println(userAmanda.getUsername());
         System.out.println(userAmanda.getPassword());
@@ -33,9 +36,13 @@ public class CreateUser {
                 System.out.println(userAmanda.getClient().getAccount().getCvv());
                 System.out.println(userAmanda.getClient().getAccount().getExpiration());
 
+                    //these are inside UserEuropean 
+                    System.out.println(userAmanda.getCountry());
+                    System.out.println(userAmanda.getPassport());
 
-        //here we are creating an foreign user, adding the extended version of user.
-        UserForeign userAmerican = new UserForeign("AmericanEagle", "myAmericanPassword", "John", 3225, "Los Angeles", "4815632598741526", 468, 072025, 4200,  "United States", "LA526547628545");
+
+        //here we are creating an american user, adding the extended version of user.
+        User userAmerican = new UserAmerican ("AmericanEagle", "myPassword", "John", 3225, "Los Angeles", "4815632598741526", 468, 072025, 4200,  "United States", "LA526547628545");
                 //uses the getters to consult.
                 System.out.println(userAmerican.getUsername());
                 System.out.println(userAmerican.getPassword());
@@ -50,14 +57,14 @@ public class CreateUser {
                         System.out.println(userAmerican.getClient().getAccount().getCvv());
                         System.out.println(userAmerican.getClient().getAccount().getExpiration());
 
-                            //these are inside UserForeign
+                            //these are inside UserAmerican 
                             System.out.println(userAmerican.getCountry());
                             System.out.println(userAmerican.getPassport());
 
-        //polymorphism: We can say that every UserForeign are Users, the most generic element can be adapted to the most especific element.
-        User userPoly = new UserForeign("PabloPoly", "Polypassword", "Pablo Garcia", 54262185, "Tijuana", "4848163265859632", 468, 042025, 3200, "Mexico", "TJ489652");
+        //polymorphism: We can say that every UserAmerican  are Users, the most generic element can be adapted to the most especific element.
+        User userPoly = new UserAmerican ("PabloPoly", "myPassword", "Pablo Garcia", 54262185, "Tijuana", "4848163265859632", 468, 042025, 3200, "Mexico", "TJ489652");
 
-        //because is apolymorphis, it access to the User.java methods, but not to the UserForeign.java methods, this is because is refered as User (in User userPoly)
+        //because is apolymorphis, it access to the User.java methods, but not to the UserAmerican .java methods, this is because is refered as User (in User userPoly)
         System.out.println("Username: " + userPoly.getUsername() + " Password: " + userPoly.getPassword());
         
 
@@ -68,6 +75,11 @@ public class CreateUser {
         anualYield.Yield(userAmerican);
         anualYield.Yield(userPoly);
 
+
+
+
+                //this is a static counter that counts the number of users created
+                System.out.println("There are " + User.getCounter() + " users registered"); 
 
 
 
@@ -94,11 +106,11 @@ public class CreateUser {
 
         //withdraw super
         userAmerican.withdraw(400.0);//this is the first withdraw
-        userAmerican.withdraw(600.0);//this is the second withdraw, which proves that it's working
+        userAmerican.withdraw(600.0);//this is the second withdraw, which proves that it's working and subtracts the amount and commission
 
         //transfer super
         userAmerican.transfer(userAmanda, 500);//to see if it's working
-        userAmerican.transfer(userAmanda, 500);//to see if it transfer and subtract the amount
+        userAmerican.transfer(userAmanda, 500);//to see if it transfer and subtract the amount and commission
 
         //SUPER polymorph
         //deposit super userPoly
@@ -113,12 +125,13 @@ public class CreateUser {
         userPoly.transfer(userAmanda, 500);//to see if it's working
         userPoly.transfer(userAmanda, 500);//to see if it transfer and subtract the amount
 
+        //utility logIn class
+/*         logInUtil utilityLogIn = new logInUtil();
+        utilityLogIn.logIn(userVinsmake, "mypassword");
+        utilityLogIn.logIn(userVinsmake, "myPassword"); */
 
+        userVinsmake.logIn("mypassword");
+        userVinsmake.logIn("myPassword");
 
-
-
-
-        //this is a static counter that counts the number of users created
-        System.out.println("There are " + User.getCounter() + " users registered"); 
     }
 }
